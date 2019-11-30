@@ -4,10 +4,17 @@ TYPE_FEMALE = 1
 TYPE_WOLF = 2
 TYPE_BARRIER = 3
 
+TYPE_LIST = [
+    TYPE_MALE,
+    TYPE_FEMALE,
+    TYPE_WOLF,
+    TYPE_BARRIER,
+]
+
 MAX_HEALTH = 100
 
 # AI func
-# def func(vision: GameMap, pos: (x, y))
+# def func(vision: GameMap)
 #   return `action`
 
 class GameEntity:

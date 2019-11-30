@@ -8,7 +8,7 @@ class GameMap:
 
         self.size = size
 
-        self.data = {}
+        self.data:{(int, int): GameEntity} = {}
 
         for x in range(size):
             for y in range(size):
@@ -20,7 +20,7 @@ class GameMap:
             for x in range(self.size):
                 print(("%" + str(strSize) + "s") % self.data[(x, y)], end="," if x < self.size-1 else "]\n")
 
-    def getVision(self, pos, size: int):
+    def getVision(self, pos: (int, int), size: int):
 
         if size % 2 == 0:
             raise "size in getVision must be odd"
@@ -36,6 +36,9 @@ class GameMap:
 
 
         return gm
+
+    def getCenter(self):
+        return (self.size // 2, self.size // 2)
 
 if __name__ == "__main__":
 
