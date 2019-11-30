@@ -2,6 +2,8 @@
 from GameMap import GameMap
 import copy
 import GameMove
+import time
+import utils
 
 class GameHistory:
 
@@ -43,6 +45,15 @@ class GameHistory:
 
         return ret
 
+    def displayGame(self, timePerTurn: float = 0.5):
+        i = 1
+        for state in self.getAllStates():
+            utils.clearscreen()
+            state.printMap()
+            print("%d / %d" % (i, len(self.actions)+1))
+            i += 1
+            time.sleep(timePerTurn)
+
 if __name__ == "__main__":
 
     from GameEntity import *
@@ -63,3 +74,7 @@ if __name__ == "__main__":
     for i in range(len(gh.actions)+1):
         gh.calcState(i).printMap()
         print()
+
+    time.sleep(1)
+
+    gh.displayGame()
