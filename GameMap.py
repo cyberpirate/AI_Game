@@ -1,4 +1,7 @@
 
+from GameEntity import GameEntity
+from GameEntity import TYPE_BARRIER
+
 class GameMap:
 
     def __init__(self, size: int):
@@ -29,7 +32,7 @@ class GameMap:
             for y in range(size):
                 srcX = pos[0] - edgeSize + x
                 srcY = pos[1] - edgeSize + y
-                gm.data[(x, y)] = self.data[(srcX, srcY)] if (srcX, srcY) in self.data else None
+                gm.data[(x, y)] = self.data[(srcX, srcY)] if (srcX, srcY) in self.data else GameEntity(TYPE_BARRIER)
 
 
         return gm

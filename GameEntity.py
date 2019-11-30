@@ -6,6 +6,10 @@ TYPE_BARRIER = 3
 
 MAX_HEALTH = 100
 
+# AI func
+# def func(vision: GameMap, pos: (x, y))
+#   return `action`
+
 class GameEntity:
 
     def __init__(self, type: int, health:int =MAX_HEALTH):

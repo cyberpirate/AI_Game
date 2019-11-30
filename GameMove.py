@@ -11,162 +11,162 @@ ATTAK_DOWN = 5
 ATTAK_LEFT = 6
 ATTAK_UP = 7
 
-def moveRight(ge: GameMap, pos):
+def moveRight(gm: GameMap, pos):
 
     dest = (pos[0] + 1, pos[1])
 
-    if pos[0] >= ge.size or pos[1] >= ge.size:
+    if pos[0] >= gm.size or pos[1] >= gm.size:
         return False
     if pos[0] < 0 or pos[1] < 0:
         return False
 
-    if dest[0] >= ge.size or dest[1] >= ge.size:
+    if dest[0] >= gm.size or dest[1] >= gm.size:
         return False
     if dest[0] < 0 or dest[1] < 0:
         return False
 
-    if ge.data[dest] is not None:
+    if gm.data[dest] is not None:
         return False
     
-    ge.data[dest] = ge.data[pos]
-    ge.data[pos] = None
+    gm.data[dest] = gm.data[pos]
+    gm.data[pos] = None
     return True
 
-def moveDown(ge: GameMap, pos):
+def moveDown(gm: GameMap, pos):
     dest = (pos[0], pos[1] + 1)
 
-    if pos[0] >= ge.size or pos[1] >= ge.size:
+    if pos[0] >= gm.size or pos[1] >= gm.size:
         return False
     if pos[0] < 0 or pos[1] < 0:
         return False
 
-    if dest[0] >= ge.size or dest[1] >= ge.size:
+    if dest[0] >= gm.size or dest[1] >= gm.size:
         return False
     if dest[0] < 0 or dest[1] < 0:
         return False
     
-    if ge.data[dest] is not None:
+    if gm.data[dest] is not None:
         return False
 
-    ge.data[dest] = ge.data[pos]
-    ge.data[pos] = None
+    gm.data[dest] = gm.data[pos]
+    gm.data[pos] = None
     return True
 
-def moveLeft(ge: GameMap, pos):
+def moveLeft(gm: GameMap, pos):
     dest = (pos[0] - 1, pos[1])
 
-    if pos[0] >= ge.size or pos[1] >= ge.size:
+    if pos[0] >= gm.size or pos[1] >= gm.size:
         return False
     if pos[0] < 0 or pos[1] < 0:
         return False
 
-    if dest[0] >= ge.size or dest[1] >= ge.size:
+    if dest[0] >= gm.size or dest[1] >= gm.size:
         return False
     if dest[0] < 0 or dest[1] < 0:
         return False
         
-    if ge.data[dest] is not None:
+    if gm.data[dest] is not None:
         return False
         
-    ge.data[dest] = ge.data[pos]
-    ge.data[pos] = None
+    gm.data[dest] = gm.data[pos]
+    gm.data[pos] = None
     return True
 
-def moveUp(ge: GameMap, pos):
+def moveUp(gm: GameMap, pos):
     dest = (pos[0], pos[1] - 1)
 
-    if pos[0] >= ge.size or pos[1] >= ge.size:
+    if pos[0] >= gm.size or pos[1] >= gm.size:
         return False
     if pos[0] < 0 or pos[1] < 0:
         return False
 
-    if dest[0] >= ge.size or dest[1] >= ge.size:
+    if dest[0] >= gm.size or dest[1] >= gm.size:
         return False
     if dest[0] < 0 or dest[1] < 0:
         return False
         
-    if ge.data[dest] is not None:
+    if gm.data[dest] is not None:
         return False
         
-    ge.data[dest] = ge.data[pos]
-    ge.data[pos] = None
+    gm.data[dest] = gm.data[pos]
+    gm.data[pos] = None
     return True
 
-def attackRight(ge: GameMap, pos):
+def attackRight(gm: GameMap, pos):
 
     dest = (pos[0] + 1, pos[1])
 
-    if pos[0] >= ge.size or pos[1] >= ge.size:
+    if pos[0] >= gm.size or pos[1] >= gm.size:
         return False
     if pos[0] < 0 or pos[1] < 0:
         return False
 
-    if dest[0] >= ge.size or dest[1] >= ge.size:
+    if dest[0] >= gm.size or dest[1] >= gm.size:
         return False
     if dest[0] < 0 or dest[1] < 0:
         return False
 
-    if ge.data[dest] is None:
+    if gm.data[dest] is None:
         return False
     
-    ge.data[dest].damage()
+    gm.data[dest].damage()
     return True
 
-def attackDown(ge: GameMap, pos):
+def attackDown(gm: GameMap, pos):
     dest = (pos[0], pos[1] + 1)
 
-    if pos[0] >= ge.size or pos[1] >= ge.size:
+    if pos[0] >= gm.size or pos[1] >= gm.size:
         return False
     if pos[0] < 0 or pos[1] < 0:
         return False
 
-    if dest[0] >= ge.size or dest[1] >= ge.size:
+    if dest[0] >= gm.size or dest[1] >= gm.size:
         return False
     if dest[0] < 0 or dest[1] < 0:
         return False
     
-    if ge.data[dest] is None:
+    if gm.data[dest] is None:
         return False
 
-    ge.data[dest].damage()
+    gm.data[dest].damage()
     return True
 
-def attackLeft(ge: GameMap, pos):
+def attackLeft(gm: GameMap, pos):
     dest = (pos[0] - 1, pos[1])
 
-    if pos[0] >= ge.size or pos[1] >= ge.size:
+    if pos[0] >= gm.size or pos[1] >= gm.size:
         return False
     if pos[0] < 0 or pos[1] < 0:
         return False
 
-    if dest[0] >= ge.size or dest[1] >= ge.size:
+    if dest[0] >= gm.size or dest[1] >= gm.size:
         return False
     if dest[0] < 0 or dest[1] < 0:
         return False
         
-    if ge.data[dest] is None:
+    if gm.data[dest] is None:
         return False
         
-    ge.data[dest].damage()
+    gm.data[dest].damage()
     return True
 
-def attackUp(ge: GameMap, pos):
+def attackUp(gm: GameMap, pos):
     dest = (pos[0], pos[1] - 1)
 
-    if pos[0] >= ge.size or pos[1] >= ge.size:
+    if pos[0] >= gm.size or pos[1] >= gm.size:
         return False
     if pos[0] < 0 or pos[1] < 0:
         return False
 
-    if dest[0] >= ge.size or dest[1] >= ge.size:
+    if dest[0] >= gm.size or dest[1] >= gm.size:
         return False
     if dest[0] < 0 or dest[1] < 0:
         return False
         
-    if ge.data[dest] is None:
+    if gm.data[dest] is None:
         return False
         
-    ge.data[dest].damage()
+    gm.data[dest].damage()
     return True
 
 actions = {
@@ -180,38 +180,58 @@ actions = {
     ATTAK_UP: attackUp,
 }
 
-def execute(ge: GameMap, pos, action: int):
+def execute(gm: GameMap, pos, action: int):
 
     if action not in actions:
         raise ("unknown action " + str(action))
 
-    return actions[action](ge, pos)
+    return actions[action](gm, pos)
 
-
+def removeDead(gm: GameMap):
+    for pos in gm.data:
+        if gm.data[pos] is not None and gm.data[pos].health <= 0:
+            gm.data[pos] = None
 
 if __name__ == "__main__":
 
+    from GameEntity import *
+
     print("Move right test")
-    ge = GameMap(3)
+    gm = GameMap(3)
 
-    ge.data[(1, 1)] = "o"
+    gm.data[(1, 1)] = "o"
 
-    ge.printMap()
+    gm.printMap()
 
-    execute(ge, (1, 1), MOVE_RIGHT)
+    execute(gm, (1, 1), MOVE_RIGHT)
     print()
 
-    ge.printMap()
+    gm.printMap()
     print("\n")
 
     print("Move down test")
-    ge = GameMap(3)
+    gm = GameMap(3)
 
-    ge.data[(1, 1)] = "o"
+    gm.data[(1, 1)] = "o"
 
-    ge.printMap()
+    gm.printMap()
 
-    execute(ge, (1, 1), MOVE_DOWN)
+    execute(gm, (1, 1), MOVE_DOWN)
     print()
 
-    ge.printMap()
+    gm.printMap()
+
+    print("\n")
+
+    print("Remove dead test")
+    gm = GameMap(3)
+
+    gm.data[(1, 1)] = GameEntity(TYPE_MALE)
+    gm.data[(1, 1)].health = 0
+
+    gm.printMap()
+
+    removeDead(gm)
+    print()
+
+    gm.printMap()
