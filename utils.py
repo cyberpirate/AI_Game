@@ -1,4 +1,6 @@
-def clearscreen(numlines=100):
+
+
+def clearScreen(numlines=100):
     """Clear the console.
     numlines is an optional argument used only as a fall-back.
     """
@@ -16,5 +18,5 @@ def clearscreen(numlines=100):
 
 if __name__ == "__main__":
     print("asdf\nasdf\nasdf")
-    clearscreen()
+    clearScreen()
     print("fdsa\nfdsa\nfdsa")

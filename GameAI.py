@@ -1,8 +1,7 @@
 
 import random
-import GameMove
 from GameMap import GameMap
-from GameEntity import *
+from GameConstants import *
 
 class GameAI:
 
@@ -10,11 +9,11 @@ class GameAI:
         pass
 
     def getAction(self, vision: GameMap):
-        return random.choice(GameMove.ACTION_LIST)
+        return random.choice(ACTION_LIST)
 
 class KillAI(GameAI):
 
-    def __init__(self, killFriends=False):
+    def __init__(self, killFriends:bool =False):
         self.killFriends = killFriends
 
     def getAction(self, vision: GameMap):
@@ -28,16 +27,16 @@ class KillAI(GameAI):
 
         if len(targets) == 0:
             dirs = {
-                GameMove.MOVE_RIGHT: (center[0] + 1, center[1]),
-                GameMove.MOVE_DOWN: (center[0], center[1] + 1),
-                GameMove.MOVE_LEFT: (center[0] - 1, center[1]),
-                GameMove.MOVE_UP: (center[0], center[1] - 1),
+                MOVE_RIGHT: (center[0] + 1, center[1]),
+                MOVE_DOWN: (center[0], center[1] + 1),
+                MOVE_LEFT: (center[0] - 1, center[1]),
+                MOVE_UP: (center[0], center[1] - 1),
             }
 
             dirs = [ d for d in dirs if vision.data[dirs[d]] is None ]
 
             if len(dirs) == 0:
-                return random.choice(GameMove.ACTION_LIST)
+                return random.choice(ACTION_LIST)
             
             return random.choice(dirs)
             
@@ -53,26 +52,28 @@ class KillAI(GameAI):
 
         if dist[closestTarget] == 1:
             dirs = {
-                (center[0] + 1, center[1]): GameMove.ATTACK_RIGHT,
-                (center[0], center[1] + 1): GameMove.ATTACK_DOWN,
-                (center[0] - 1, center[1]): GameMove.ATTACK_LEFT,
-                (center[0], center[1] - 1): GameMove.ATTACK_UP,
+                (center[0] + 1, center[1]): ATTACK_RIGHT,
+                (center[0], center[1] + 1): ATTACK_DOWN,
+                (center[0] - 1, center[1]): ATTACK_LEFT,
+                (center[0], center[1] - 1): ATTACK_UP,
             }
             return dirs[target]
         
         dirs = {
-            GameMove.MOVE_RIGHT: (center[0] + 1, center[1]),
-            GameMove.MOVE_DOWN: (center[0], center[1] + 1),
-            GameMove.MOVE_LEFT: (center[0] - 1, center[1]),
-            GameMove.MOVE_UP: (center[0], center[1] - 1),
+            MOVE_RIGHT: (center[0] + 1, center[1]),
+            MOVE_DOWN: (center[0], center[1] + 1),
+            MOVE_LEFT: (center[0] - 1, center[1]),
+            MOVE_UP: (center[0], center[1] - 1),
         }
 
+        newDirs = {}
         for d in dirs:
-            if vision.data[dirs[d]] != None:
-                del dirs[d]
+            if vision.data[dirs[d]] == None:
+                newDirs[d] = dirs[d]
+        dirs = newDirs
 
         if len(dirs) == 0:
-            return GameMove.DO_NOTHING
+            return DO_NOTHING
 
         ret = random.choice([ d for d in dirs ])
         for d in dirs:
@@ -86,19 +87,21 @@ class KillAI(GameAI):
 
 if __name__ == "__main__":
 
+    import GameEntity
+
     print("Test kill ai")
 
     gm = GameMap(3)
 
-    gm.data[(1, 1)] = GameEntity(TYPE_WOLF)
+    gm.data[(1, 1)] = GameEntity.GameEntity(TYPE_WOLF)
 
     ai = KillAI()
 
-    print(GameMove.ACTION_NAMES[ai.getAction(gm)])
+    print(ACTION_NAMES[ai.getAction(gm)])
     
-    gm.data[(0, 0)] = GameEntity(TYPE_MALE)
-    print(GameMove.ACTION_NAMES[ai.getAction(gm)])
+    gm.data[(0, 0)] = GameEntity.GameEntity(TYPE_MALE)
+    print(ACTION_NAMES[ai.getAction(gm)])
 
     gm.data[(0, 0)] = None
-    gm.data[(0, 1)] = GameEntity(TYPE_MALE)
-    print(GameMove.ACTION_NAMES[ai.getAction(gm)])
+    gm.data[(0, 1)] = GameEntity.GameEntity(TYPE_MALE)
+    print(ACTION_NAMES[ai.getAction(gm)])

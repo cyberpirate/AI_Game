@@ -48,7 +48,7 @@ class GameHistory:
     def displayGame(self, timePerTurn: float = 0.5):
         i = 1
         for state in self.getAllStates():
-            utils.clearscreen()
+            utils.clearScreen()
             state.printMap()
             print("%d / %d" % (i, len(self.actions)+1))
             i += 1
@@ -56,11 +56,12 @@ class GameHistory:
 
 if __name__ == "__main__":
 
-    from GameEntity import *
+    import GameEntity
+    from GameConstants import *
 
     gm = GameMap(5)
 
-    gm.data[(2, 2)] = GameEntity(TYPE_MALE)
+    gm.data[(2, 2)] = GameEntity.GameEntity(TYPE_MALE)
 
     gh = GameHistory(gm)
 

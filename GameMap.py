@@ -1,10 +1,11 @@
 
-from GameEntity import GameEntity
-from GameEntity import TYPE_BARRIER
+from GameConstants import *
 
 class GameMap:
 
     def __init__(self, size: int):
+
+        from GameEntity import GameEntity
 
         self.size = size
 
@@ -14,16 +15,21 @@ class GameMap:
             for y in range(size):
                 self.data[(x, y)] = None
 
-    def printMap(self, strSize:int =4):
+    def printMap(self):
+        print("|" + ("--" * (self.size)) + "|")
         for y in range(self.size):
-            print("[", end="")
+            print("|", end="")
             for x in range(self.size):
-                print(("%" + str(strSize) + "s") % self.data[(x, y)], end="," if x < self.size-1 else "]\n")
+                print(("%2s") % self.data[(x, y)] if self.data[(x, y)] != None else "  ", end="")
+            print("|")
+        print("|" + ("--" * (self.size)) + "|")
 
     def getVision(self, pos: (int, int), size: int):
 
         if size % 2 == 0:
             raise "size in getVision must be odd"
+
+        from GameEntity import GameEntity
 
         edgeSize = size // 2
         gm = GameMap(size)
