@@ -20,7 +20,7 @@ class GameMaster:
 
         self.size = size
 
-    def initGameMap(self):
+    def initGameMap(self, entityList: [GameEntity] = None):
 
         gm = GameMap(self.size)
 
@@ -28,11 +28,19 @@ class GameMaster:
 
         random.shuffle(spotsLeft)
 
-        index = 0
-        for t in NUM_TYPES:
-            for n in range(NUM_TYPES[t]):
-                gm.data[spotsLeft[index]] = GameEntity(t, KillAI())
-                index += 1
+        if entityList == None:
+            entityList = []
+            for t in NUM_TYPES:
+                for n in range(NUM_TYPES[t]):
+                    entityList.append(GameEntity(t, KillAI()))
+
+        if len(spotsLeft) < len(entityList):
+            raise "Not enough spots for entites"
+
+        spotsLeft = spotsLeft[:len(entityList)]
+
+        for x in zip(spotsLeft, entityList):
+            gm.data[x[0]] = x[1]
 
         return gm
 
@@ -42,9 +50,10 @@ class GameMaster:
         people = [ pos for pos in players if gm.data[pos].type == TYPE_MALE or gm.data[pos].type == TYPE_FEMALE ]
         return len(wolves) == 0 or len(people) == 0
 
-    def runGame(self, timePerTurn: float = 0):
+    def runGame(self, gm: GameMap = None, timePerTurn: float = 0):
 
-        gm = self.initGameMap()
+        if gm is None:
+            gm = self.initGameMap()
         gh = GameHistory(gm)
 
         if timePerTurn > 0:
@@ -91,4 +100,4 @@ if __name__ == "__main__":
     gMaster = GameMaster()
     gMaster.initGameMap().printMap()
 
-    gMaster.runGame(0.25)
+    gMaster.runGame(timePerTurn=0.25)
