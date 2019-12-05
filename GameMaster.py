@@ -92,6 +92,8 @@ class GameMaster:
 
         if timePerTurn > 0:
             print("done in %d turns" % turn)
+        
+        return gh
 
         
 
